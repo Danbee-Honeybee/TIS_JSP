@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="ssi.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,15 +31,24 @@
   out.println("메일=" + Gemail + "<br>");
   
   try{
+  	Class.forName("oracle.jdbc.driver.OracleDriver"); //드라이브로드
+    String url="jdbc:oracle:thin:@127.0.0.1:1521:XE" ;
+    CN=DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE","system","1234");
+    System.out.println("[guestWriteSave2.jsp] Oracle Connected at 07-21");
+    
   	//Statement 명령어 대신 PreparedStatement 명령어로 수정하기
-    ST=CN.createStatement();
- 	
-    //msg="insert into guest values(Gsabun, 싱Gname싱, 싱Gtitle싱, sysdate, Gpay, 0, 싱Gemail싱)";
-    msg="insert into guest values(" + Gsabun +", '" + Gname + "', '"+ Gtitle + "', sysdate, " + Gpay + ", "+ 0 +", '" + Gemail + "')";
-  	System.out.println(msg);
-  	System.out.println("데이터 저장 성공 했습니다.");
-  	out.println(msg);
-  	ST.executeUpdate(msg); //데이터를 오라클에 넣어주는 역할
+    //msg="insert into guest values(Gsabun, Gname, Gtitle, sysdate, Gpay, Ghit, Gemail)";
+    msg="insert into guest values(?, ?, ?, sysdate, ?, 0, ?)"; // 물음표 갯수가 순서임
+    PST=CN.prepareStatement(msg);
+    	PST.setInt(1, Gsabun);
+    	PST.setString(2, Gname);
+    	PST.setString(3, Gtitle);
+    	PST.setInt(4, Gpay);
+    	PST.setString(5, Gemail);
+  		//ST.executeUpdate(msg); 데이터를 오라클에 넣어주는 역할
+  	PST.executeUpdate();
+  	System.out.println("데이터 저장 성공 했습니다.\n" + msg);
+	out.println(msg);
   } catch (Exception e){}
   response.sendRedirect("guestList.jsp");
   %>
