@@ -17,7 +17,7 @@
 	Gpay   = Integer.parseInt(request.getParameter("pay"));
 	Gemail = request.getParameter("email");
   
-    try{ //삭제하는 쿼리
+    try{ //수정하는 쿼리
       msg = "update guest set sabun=?, name=?, title=?, pay=?, email=? " 
     	   +" where sabun= "+ Gsabun;
       	PST = CN.prepareStatement(msg);
