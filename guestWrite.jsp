@@ -15,11 +15,11 @@
  <p>
   guestWrite.jsp문서 입력화면<p>
  <form method="get" action="guestWriteSave2.jsp">
- 사번 : <input type="text" name="sabun" value="6666"><br>
- 이름 : <input type="text" name="name" value="yuk"><br> 
- 제목 : <input type="text" name="title" value="yuyu"><br>
+ 사번 : <input type="text" name="sabun" ><br>
+ 이름 : <input type="text" name="name" ><br> 
+ 제목 : <input type="text" name="title" ><br>
  급여 : <input type="text" name="pay" value="66"><br> 
- 메일 : <input type="text" name="email" value="yy@tis.com"><br>
+ 메일 : <input type="text" name="email" value="@tis.com"><br>
       <input type="submit" value="등록하기">
       <input type="reset" value="입력취소">
  </form>

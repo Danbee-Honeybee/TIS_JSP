@@ -28,13 +28,13 @@
      System.out.println("메일=" + Gemail + "<br>");
      //중복체크
      try{
-     msg="select sabun from guest";
+     msg="select count(*) as cnt from guest where sabuin ="+ Gsabun;
      ST=CN.createStatement();
      RS=ST.executeQuery(msg);
-     while (RS.next()){
-     if (Gsabun == RS.getInt("sabun")) {
+     if(RS.next()){Gtotal=RS.getInt("cnt");}
+     if (Gtotal>0) {
         %>
-        <div align="center"> 
+        <div>
         <img src="images/a1.png"> <br>
         </div>
         <script type="text/javascript">
@@ -44,7 +44,6 @@
         //history.back();
         </script>
         <%
-    
     } else {
     msg="insert into guest values(?, ?, ?, sysdate, ?, 0, ?)"; // 물음표 갯수가 순서임
     PST=CN.prepareStatement(msg);
@@ -56,9 +55,8 @@
         PST.executeUpdate();
     System.out.println("데이터 저장 성공 했습니다.\n" + msg);
     out.println(msg);
-    //response.sendRedirect("guestList.jsp");
+    response.sendRedirect("guestList.jsp");
     } //else end
-  }//while end
     } catch (Exception e){
   	System.out.println("[guestWriteSave.jsp] 에러 사유 : " + e);}
   %>

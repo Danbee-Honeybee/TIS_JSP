@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>[ Index.jsp ]</title>
 <script type="text/javascript">
+	setTimeout("location.href='guestList.jsp'", 5000)
 </script>
 <style type="text/css">
 	#pline{ margin-top : 70px; }
@@ -12,12 +13,13 @@
 </style>
 </head>
 <body>
-	<p id="pline">
-	<div align="center">
-	<img src="./images/a1.png"> <p>
-	<font size="6" color="blue">
-	<b> Waiting ... Loading... </b>
-	</font>
-	</div>
+	
+	 <div align="center">
+        <br>
+        <video width="900" autoplay muted loop controls="controls">
+        <source src="images/scuba.mp4"></video></sourse>
+        </video>
+        <p></p>
+    </div>
 </body>
 </html>

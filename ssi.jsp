@@ -12,10 +12,11 @@
   PreparedStatement PST;
   CallableStatement CST; 
   ResultSet RS; 
-  int Gsabun, Gpay, Ghit, Gtotal; String Gname, Gtitle, Gemail, Grownum;
+  int Gsabun, Gpay, Ghit, Gtotal, GStotal; 
+  String Gname, Gtitle, Gemail, Grownum;
   java.util.Date Gwdate;
   String msg="쿼리문기술"; String submsg="";
-  String data;
+  String Gdata;
 %>
 <!DOCTYPE html>
 <html>
@@ -26,6 +27,7 @@
 	*{font-size:16pt;}
 	a{ font-size: 16pt; color:black; text-decoration:none;}
 	a:hover{ font-size: 16pt; color:blue; text-decoration:underline;}
+	#pline{ margin-top : 35px; }
 </style>
 </head>
 <body>
@@ -36,8 +38,9 @@
     String url="jdbc:oracle:thin:@127.0.0.1:1521:XE" ;
     CN=DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE","system","1234");
     Date now = new Date();
-    System.out.println("[guestWriteSave2.jsp] Oracle Connected at " + now);
+    System.out.println("[ssi.jsp] Oracle Connected at " + now);
 	}catch(Exception ex){System.out.println("Error name :" + ex);}
+	ST=CN.createStatement();
 %>
 
 </body>

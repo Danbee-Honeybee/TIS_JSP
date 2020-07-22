@@ -32,7 +32,6 @@
   try{
   	//Statement 명령어 대신 PreparedStatement 명령어로 수정하기
     ST=CN.createStatement();
- 	
     //msg="insert into guest values(Gsabun, 싱Gname싱, 싱Gtitle싱, sysdate, Gpay, 0, 싱Gemail싱)";
     msg="insert into guest values(" + Gsabun +", '" + Gname + "', '"+ Gtitle + "', sysdate, " + Gpay + ", "+ 0 +", '" + Gemail + "')";
   	System.out.println(msg);
