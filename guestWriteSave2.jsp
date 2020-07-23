@@ -38,7 +38,7 @@
         <img src="images/a1.png"> <br>
         </div>
         <script type="text/javascript">
-        alert("이미 있는 사번 입니다. 다른 사번을 이용하세요.");
+        alert("<%=Gsabun%>은 이미 있는 사번 입니다. 다른 사번을 이용하세요.");
         location.href="guestWrite.jsp";
         //response.sendRedirect("guestWrite.jsp"); return 못쓰니까 금지
         //history.back();
@@ -53,9 +53,8 @@
        PST.setString(3, Gtitle);
        PST.setInt(4, Gpay);
        PST.setString(5, Gemail);
-        PST.executeUpdate();
-    System.out.println("데이터 저장 성공 했습니다.\n" + msg);
-    out.println(msg);
+       PST.executeUpdate();
+    System.out.println("[guestWriteSave2] Data saved \n[msg] " + msg);
     //response.sendRedirect("guestList.jsp");
     } //else end
   }//while end

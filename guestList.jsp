@@ -10,11 +10,6 @@
 </head>
 <body> <!-- 이 파일은 단독실행 가능 -->
 <%
-    //ST=CN.createStatement();
-    //String msg2="select rownum rn, g.* from guest g"; //행번호도 나오면서 사번으로 소트하는건 어떻게 하는걸까?
-    //RS=ST.executeQuery(msg2);
-%>
-<%
 	msg="select count(*) as Record from guest";
 	RS=ST.executeQuery(msg);
 	RS.next();
@@ -24,15 +19,15 @@
 
 <table width=900 border="1" cellspacing="0">
 <tr align="center">
-	<td colspan="7">레코드 갯수 [<%= Gtotal %>]</td>
+	<td colspan="8">레코드 갯수 [<%= Gtotal %>]</td>
 </tr>
 
 <tr bgcolor="yellow">
-<td>행번호</td> <td>사번</td> <td>이름</td> <td>제목</td> <td>이메일</td> <td>날짜</td> <td>조회수</td>
+<td>행번호</td> <td>사번</td> <td>이름</td> <td>제목</td> <td>이메일</td> <td>날짜</td> <td>조회수</td> <td>삭제</td>
 </tr>
 
 <%
-    msg="select rownum rn, g.* from guest g"; //행번호도 나오면서 사번으로 소트하는건 어떻게 하는걸까?
+    msg="select rownum rn, g.* from guest g";
     RS=ST.executeQuery(msg);
 	while(RS.next()){
 		//Grownum=RS.getInt("rn");
@@ -48,6 +43,7 @@
   <td><%= RS.getString("email") %></td>
   <td><%= RS.getDate("wdate") %></td> 
   <td><%= RS.getInt("hit") %></td>
+  <td align="center"><input type="button" value="삭제" onclick="location.href='guestDelete.jsp?idx=<%=Gsabun %>'"></td>
 </tr>
 <% } %>
 </table>

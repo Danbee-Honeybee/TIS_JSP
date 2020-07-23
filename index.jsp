@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <title>[ Index.jsp ]</title>
 <script type="text/javascript">
-	setTimeout("location.href='guestList.jsp'", 5000)
+	setTimeout("location.href='guestList.jsp'", 3000)
 </script>
 <style type="text/css">
 	#pline{ margin-top : 70px; }

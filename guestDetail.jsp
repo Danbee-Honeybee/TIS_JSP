@@ -15,7 +15,7 @@
 
 <%
     Gdata = request.getParameter("idx");
-	System.out.println("[guestDetail] 넘어온 Gsabun =" + Gdata);
+	System.out.println("[guestDetail] 넘어온 Gsabun : " + Gdata);
     msg="select * from guest where sabun = " + Gdata;
     ST=CN.createStatement();
     RS=ST.executeQuery(msg); // 조회한 한건의 결과를 RS가 기억하는중
@@ -66,8 +66,8 @@
 	<tr>
 		<td colspan="2" align="center"><p>
 		 <a href="guestWrite.jsp">[등록]</a>
-		 <a href="guestEdit.jsp?idx=<%=Gsabun%>">[수정]</a>
-		 <a href="guestDelete.jsp?idx=<%=Gsabun%>">[삭제]</a>
+		 <a href="guestEdit.jsp?sa=<%=Gsabun%>&na=<%=Gname%>&ta=<%=Gtitle%>&pa=<%=Gpay%>&ea=<%=Gemail%>">[수정]</a>
+		 <a href="guestDelete2.jsp?idx=<%=Gsabun%>">[삭제]</a>
 		 <a href="index.jsp">[메인화면]</a>
 		 <a href="guestList.jsp">[전체출력]</a>
 	 </p>

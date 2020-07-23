@@ -6,21 +6,21 @@
 <meta charset="UTF-8">
 <title>[guestDelete.jsp]</title>
 <style type="text/css">
-	*{font-size:16pt;}
-	a{ font-size: 16pt; color:black; text-decoration:none;}
-	a:hover{ font-size: 16pt; color:blue; text-decoration:underline;}
 </style>
 </head>
 <body>
-  <%
-  try{ //삭제하는 쿼리
-  	int ret = Integer.parseInt(request.getParameter("idx"));
-    msg="delete from guest where sabun =" + ret;
-    ST=CN.createStatement();
-    ST.executeUpdate(msg);
-  	System.out.println("데이터 삭제 성공 했습니다.");
-  } catch (Exception e){}
-  response.sendRedirect("guestList.jsp");
-  %>
+<%  //삭제하는 쿼리
+	try{ 
+        System.out.println("[guestDelete] Body accessed ");
+        
+		int ret = Integer.parseInt(request.getParameter("idx"));
+        msg="delete from guest where sabun =" + ret;
+        ST=CN.createStatement();
+        ST.executeUpdate(msg);
+    
+        System.out.println("[guestDelete] Data deleted ");
+    } catch (Exception e){}
+    response.sendRedirect("guestList.jsp");
+%>
 </body>
 </html>

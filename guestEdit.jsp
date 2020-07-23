@@ -4,23 +4,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>[guestEdit.jsp]</title>
+<title>[guestEditSave.jsp]</title>
 <style type="text/css">
 </style>
 </head>
-<body>
-<%
-    Gdata= request.getParameter("idx");
+<body> <!-- 단독실행 금지 -->
+    <%
+    String Gsabun= request.getParameter("sa");
+    String Gname= request.getParameter("na");
+    String Gtitle= request.getParameter("ta");
+    String Gpay= request.getParameter("pa");
+    String Gemail= request.getParameter("ea");
     System.out.println("[guestEdit] 넘어온 Gsabun : " + Gdata);
-  %>
-
+    %>
 
  <form method="get" action="guestEditSave.jsp">
- 사번 : <input type="text" name="sabun" value="<%=Gdata %>"><br>
- 이름 : <input type="text" name="name" value=""><br> 
- 제목 : <input type="text" name="title" value=""><br>
- 급여 : <input type="text" name="pay" value=""><br> 
- 메일 : <input type="text" name="email" value=""><br>
+ 사번 : <input type="text" name="sabun" value="<%=Gsabun %>" readonly><br>
+ 이름 : <input type="text" name="name" value="<%=Gname %>"><br> 
+ 제목 : <input type="text" name="title" value="<%=Gtitle %>"><br>
+ 급여 : <input type="text" name="pay" value="<%=Gpay %>"><br> 
+ 메일 : <input type="text" name="email" value="<%=Gemail %>"><br>
       <input type="submit" value="수정완료">
       <input type="reset" value="수정취소">
    </form>
