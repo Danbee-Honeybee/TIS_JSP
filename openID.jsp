@@ -10,10 +10,7 @@
    </style>
    
    <script type="text/javascript">
-   <%
-   Gdata = request.getParameter("idx"); // idx 는 guestWrite 에 있는 a
-   System.out.println("[OpenID] 넘어온 Gsabun : " + Gdata);
-   %> 
+   
      function first(){
        open_form.userid.focus();
      }
@@ -24,8 +21,9 @@
 <div>
   <img name="idform" src="images/bar.gif" width=400><br>
 	<form name="open_form"method="get" action="openIDSave.jsp">
-	  userid:<input type="text" name="userid" value="<%=Gdata%>">
-	         <input type="submit" value="중복처리">
+		<%Gdata = request.getParameter("idx");%> 
+	  	userid:<input type="text" name="userid" value="<%=Gdata%>">
+	           <input type="submit" value="중복처리">
 	</form>
   <img src="images/bar.gif" width=400><br>
 </div>

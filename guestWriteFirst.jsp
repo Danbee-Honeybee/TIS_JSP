@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>[guestWrite.jsp 입력 화면]</title>
+<title>[guestWriteFirst.jsp 복사본]</title>
 <style type="text/css">
 	*{font-size:16pt;}
 	a{ font-size: 16pt; color:black; text-decoration:none;}
@@ -19,7 +19,6 @@
 		var b = document.myform.name.value;  
 		var c = document.myform.title.value; 
 		var d = document.myform.pay.value;   //급여가 2자릿수인지 체크
-		
 		if (a==null || a==""){
 			alert("사번은 공백일 수 없습니다.");
 			myform.sabun.focus();
@@ -69,7 +68,7 @@
 		var a = document.myform.sabun.value;
 		var len_sabun = myform.sabun.value.length;
 		if (a!=null || a!=""){
-			//alert("중복확인 버튼을 눌러주세요.");
+			alert("중복확인 버튼을 눌러주세요.");
 			myform.pay.focus();
 			open("openID.jsp?idx="+a,"openID.jsp","width=500, height=200, left=700, top=300");
 			return; //이 뒤로는 수행 안한다.
@@ -82,10 +81,8 @@
  <p>
   guestWrite.jsp문서 입력화면<p>
  <form name="myform" method="post" action="guestWriteSave2.jsp">
- 
  사번 : <input type="text" name="sabun" maxlength="4" value="7792" size="10">
  	  <input type="button" onclick="idCheck();" value="ID중복"> <br>
- 	  
  이름 : <input type="text" name="name" value="blue"> <br> 
  제목 : <input type="text" name="title" value="blue"> <br>
  급여 : <input type="text" name="pay" value="66"> <br> 

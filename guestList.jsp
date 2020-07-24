@@ -48,7 +48,7 @@
 <% } %>
 </table>
 <br>
- <a href="guestWrite.jsp">[회원등록]</a>
+ <a href="guestWriteCheck.jsp">[회원등록]</a>
  <a href="index.jsp">[메인화면]</a>
  <a href="guestList.jsp">[전체출력]</a>	
 	<p><br>
