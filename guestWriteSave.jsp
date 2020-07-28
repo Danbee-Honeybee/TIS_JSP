@@ -53,9 +53,7 @@
     PST.executeUpdate();
     System.out.println("[guestWriteSave] Data saved \n[msg] " + msg);
     response.sendRedirect("guestList.jsp");
-    %><script type="text/javascript">
-    </script><%
-    } //else end
+    }
   }//while end
     } catch (Exception e){
   	System.out.println("[guestWriteSave] 에러 사유 : " + e);}

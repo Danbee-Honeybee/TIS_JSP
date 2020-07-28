@@ -35,7 +35,7 @@
 			  <script type="text/javascript">
 			        alert("<%=Gdata%>은 사용가능합니다.");
 			        opener.myform.sabun.value=<%= Gdata%>; 
-			        opener.myform.duplication_ch.value="idchecked";
+			        //opener.myform.duplication_ch.value="idchecked";
 			        location.href="openID.jsp?able='good'";
 			        close();
 		      </script>

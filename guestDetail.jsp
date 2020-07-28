@@ -67,7 +67,7 @@
 		<td colspan="2" align="center"><p>
 		 <a href="guestWrite.jsp">[등록]</a>
 		 <a href="guestEdit.jsp?sa=<%=Gsabun%>&na=<%=Gname%>&ta=<%=Gtitle%>&pa=<%=Gpay%>&ea=<%=Gemail%>">[수정]</a>
-		 <a href="guestDelete2.jsp?idx=<%=Gsabun%>">[삭제]</a>
+		 <a href="guestDelete.jsp?idx=<%=Gsabun%>">[삭제]</a>
 		 <a href="index.jsp">[메인화면]</a>
 		 <a href="guestList.jsp">[전체출력]</a>
 	 </p>
