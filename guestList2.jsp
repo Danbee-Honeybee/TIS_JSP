@@ -42,8 +42,6 @@
 	
 	sval= request.getParameter("keyfield");
 	skey= request.getParameter("keyword");
-	search(sval, skey);
-	
 	
 	String pnum = request.getParameter("pageNum"); 
 	//request로 받았으니까 클릭하면 문자로 12을 기억한다
