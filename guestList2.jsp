@@ -15,13 +15,13 @@
 </head>
 <body> <!-- 이 파일은 단독실행 가능 -->
 <%
-//=========================================================================================================
-							msg="select count(*) as cnt from guest";
-							ST=CN.createStatement();
-							RS=ST.executeQuery(msg);
-							RS.next();
-							Gtotal = RS.getInt("cnt"); //Gtotal 은 지금 316을 가지고 있다. 레코드 갯수니까.
-//=========================================================================================================
+	//오늘 숙제 페이지갯수 32 나오게 하기
+	msg="select count(*) as cnt from guest";
+	ST=CN.createStatement();
+	RS=ST.executeQuery(msg);
+	RS.next();
+	Gtotal = RS.getInt("cnt"); //Gtotal 은 지금 316을 가지고 있다. 레코드 갯수니까.
+	
 	//페이징, 검색, 댓글
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 	Date dt = new Date();
@@ -30,6 +30,7 @@
 	int pageNUM, pagecount;
 	//pageNUM = 숫자 13으로 변환을 해
 	//pagecount = 32개야. 지금 데이터가 316개 인데 페이지 수가 32가 되어야하니까.
+
 	
 	int start, end; //시작행 261 끝행 270 [이전] [21] ~27 ~ [30] [다음]   이건 행이야.
 	int startpage, endpage; //시작페이지 21, 끝페이지 30   이건 페이지야.
@@ -41,21 +42,9 @@
 	
 	sval= request.getParameter("keyfield");
 	skey= request.getParameter("keyword");
+	search(sval, skey);
 	
-	if(skey==null || skey=="" || sval==null || sval==""){
-		skey="";
-		sval="";
-		sqry=" where name like '%%' "; //null 이면 모두 출력
-	} else {
-		sqry=" where "+sval+" like '%"+sval+"%' "; //서브쿼리
-	}
-//=========================================================================================================
-							 msg="select count(*) as cnt from guest "  + sqry;
-							 ST=CN.createStatement();
-							 RS=ST.executeQuery(msg);
-							 RS.next(); //if, while 없이 이동
-							 Gtotal = RS.getInt("cnt"); //Gtotal는 조회갯수를 기억합니다
-//=========================================================================================================
+	
 	String pnum = request.getParameter("pageNum"); 
 	//request로 받았으니까 클릭하면 문자로 12을 기억한다
 	//13이라는 숫자를 String 타입으로 받는다. <a href="guestList.jsp?pageNum=7">[7]</a>
@@ -63,7 +52,6 @@
 	if (pnum==null||pnum==""){pnum="1";} //만약에 pnum 값이 없거나 비어있다면, 1페이지를 출력해라
 	pageNUM = Integer.parseInt(pnum);
 	System.out.println("[guestList] 클릭한 페이지 : " + pageNUM);
-	
 	
 	start = (pageNUM-1)*10+1;	//121;  [13] 을 클릭했을때 	시작행
 	end   = (pageNUM*10);  	 	//130;  [13] 을 클릭했을때 	끝행
@@ -87,16 +75,38 @@
 	ST=CN.createStatement();
 	RS=ST.executeQuery(msg);
 %>
+	
+
 <p id="Pline">
 
 <table width=900 border="1" cellspacing="0">
 <tr align="center">
-	<td colspan="8">총 레코드 갯수 [<%= Gtotal %> / <%= GGtotal %>]</td>
+	<td colspan="8">레코드 갯수 [<%= Gtotal %>]</td>
 </tr>
 
 <tr align="center" bgcolor="yellow">
 <td>행번호</td> <td>사번</td> <td>이름</td> <td>제목</td> <td>이메일</td> <td>날짜</td> <td>조회수</td> <td>삭제</td>
 </tr>
+
+	<script type="text/javascript">
+		var Gflag = false;
+		function searching(){
+			<%  
+				if(skey==null || skey=="" || sval==null || sval==""){
+					skey="title";
+					sval="p";
+					System.out.println("[guestList] 넘어온 keyfield : "+ sval);
+					System.out.println("[guestList] 넘어온 keyword : " + skey);
+				} else { // null이 아닌 경우
+				String searching_msg = "select * from (select rownum rn, "
+									  +"g.* from guest g where "+ sval +" like '%"+skey+"%' order by rn) "
+									  +" where rn between 11 and 20 ";
+				ST=CN.createStatement();
+				RS=ST.executeQuery(msg);
+				}
+		%>
+	 }
+	</script>
 
 <%
 	while(RS.next()){
@@ -138,7 +148,8 @@
 		if(endpage < pagecount){ //[10] < 32 크면 10이 32보다 클수없으니 적으면!!!! 으로 적어야한다. 
 			out.println("<a href=guestList.jsp?pageNum="+(startpage+10)+">[다음]</a>");
 		}
-		%><p>
+		%>
+			<p>
 		</td>
 	</tr>
 
@@ -161,7 +172,7 @@
 				<option value="contents"> 내용 </option>
 			</select>
 			 <input type="text" name="keyword" placeholder="검색어 입력">
-			 <input type="submit" value="검색">
+			 <input type="submit" value="검색" onclike="searching();">
 		</form>
 	</td>
 	</tr>

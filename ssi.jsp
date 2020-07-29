@@ -12,7 +12,12 @@
   PreparedStatement PST;
   CallableStatement CST; 
   ResultSet RS; 
-  int Gsabun, Gpay, Ghit, Gtotal, GStotal; 
+  int Gsabun;
+  int Gpat;
+  int Ghit;
+  int Gtotal; 	//조회레코드갯수
+  int GGtotal; 	//전체레코드갯수
+  int GStotal;
   String Gname, Gtitle, Gemail, Grownum;
   java.util.Date Gwdate;
   String msg="쿼리문기술"; String submsg="";
