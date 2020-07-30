@@ -11,12 +11,10 @@
    function yes(){
       <%
       try{ //삭제하는 쿼리
-         System.out.println("[guestDelete2] accessed to function 'yes'");
          int ret = Integer.parseInt(request.getParameter("idx"));
 	        msg="delete from guest where sabun =" + ret;
 	        ST=CN.createStatement();
 	        ST.executeUpdate(msg);
-         System.out.println("[guestDelete2_yes]데이터 삭제 성공 했습니다.");
       } catch (Exception e){}
       //response.sendRedirect("guestList.jsp");
       %>

@@ -3,95 +3,125 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>[guestWrite.jsp 입력 화면]</title>
+<title>[guestWrite.jsp 응용]</title>
 <style type="text/css">
 	*{font-size:16pt;}
 	a{ font-size: 16pt; color:black; text-decoration:none;}
 	a:hover{ font-size: 16pt; color:blue; text-decoration:underline;}
 </style>
 <script type="text/javascript">
-	var Gflag=false;
-	//함수명은 대소문자 구분 한다.
-	function nullCheck(){ //공백인지 아닌지 체크하는 function
-		//document는 생략가능
-		//돔=dom모델객체 document, window, location, history
-		var a = document.myform.sabun.value; //사번이 4자릿수인지 체크
+    var Gflag=false;
+	//중복체크 여부를 알기 위해서
+	//아이디 중복체크 하고 돌아오면 Gflag 가 true가 됌
+	//int Gflag=0 또는 1로 해도됌 구분만 할 수 있으면 됌
+	
+	function nullCheck(){
+		var flag=false;
+		var a = document.myform.sabun.value;
 		var b = document.myform.name.value;  
 		var c = document.myform.title.value; 
-		var d = document.myform.pay.value;   //급여가 2자릿수인지 체크
+		var d = document.myform.pay.value;
+		var e = document.myform.email.value;
+		var checkret = myform.duplication_ch.value;
 		
 		if (a==null || a==""){
-			alert("사번은 공백일 수 없습니다.");
+			document.getElementById("sabun_ch").innerHTML="<font style='font-size:12pt; color:red'>*사번을 입력하세요*</font>";         
 			myform.sabun.focus();
-			return; //이 뒤로는 수행 안한다.
-		} else if (a.length != 4){
-			alert("사번은 4자리 숫자여야합니다.");
-			//myform.sabun.value=""; 입력되어 있던 데이터 다 지우기
+			return false;
+		} else {document.getElementById("sabun_ch").innerHTML=""; myform.sabun.focus();} 
+		
+		if (a.length != 4 || sabun_format.test(a)==false){
+			document.getElementById("sabun_ch").innerHTML="<font style='font-size:12pt; color:red'>*사번은 4자리 숫자로만 입력 가능합니다.*</font>";
 			myform.sabun.value = a.substring(0,4);
 			myform.sabun.focus();
-			return;
-		} else {myform.sabun.focus();}
+			return false;
+		} else {document.getElementById("sabun_ch").innerHTML=""; myform.sabun.focus();}
 		
 		if (b==null || b==""){
-			alert("이름은 공백일 수 없습니다.");
+			document.getElementById("name_ch").innerHTML="<font style='font-size:12pt; color:red'>*이름을 입력하세요.*</font>";
 			myform.name.focus();
-			return; //이 뒤로는 수행 안한다.
+			return;
 		} else {myform.name.focus();}
 		
 		if (c==null || c==""){
-			alert("제목은 공백일 수 없습니다.");
+			document.getElementById("title_ch").innerHTML="<font style='font-size:12pt; color:red'>*제목을 입력하세요.*</font>";
 			myform.title.focus();
-			return; //이 뒤로는 수행 안한다.
+			return;
 		} else {myform.title.focus();}
 		
 		if (d==null || d==""){
-			alert("급여는 공백일 수 없습니다.");
+			document.getElementById("pay_ch").innerHTML="<font style='font-size:12pt; color:red'>*급여를 입력하세요.*</font>";
 			myform.pay.focus();
-			return; //이 뒤로는 수행 안한다.
+			return;
 		} else if (d.length != 2){
-			alert("급여는 2자리 숫자여야합니다.");
+			document.getElementById("pay_ch").innerHTML="<font style='font-size:12pt; color:red'>*급여는 2자리입니다.*</font>";
 			myform.pay.value = d.substring(0,2);
 			myform.pay.focus();
 			return;
 		} else {myform.title.focus();}
 		
-		//모든 입력란이 잘 채워졌다면, 등록하기 클릭시 action="guestWriteSave2.jsp" 이 실행되어야함.
-		document.myform.submit(); //action="guestWriteSave2.jsp" 과 연결되게 끔 하는 문장입니다.
+		//이메일 체크
+		var email_format = /^([a-zA-Z0-9-_\.]{3,15})@([a-zA-Z]{2,15})\.([a-zA-Z]{2,10})$/;
+		if (e==null|| e==""){
+			document.getElementById("email_ch").innerHTML="<font style='font-size:12pt; color:red'>*이메일을 입력하세요.*</font>";
+			myform.email.focus();
+			return;
+		} else if (email_format.test(e)==false){
+			document.getElementById("email_ch").innerHTML="<font style='font-size:12pt; color:red'>*sky@gmail.com형식으로 입력하세요*</font>";
+			myform.email.value="";
+			myform.email.focus();
+			return;
+		} else {
+			document.getElementById("email_ch").innerHTML="";
+			myform.email.focus();
+		}
+		
+		
+		
+		if (Gflag==false) {
+			 alert("id 중복체크 하세요");
+			 return ; //아래문장수행처리 하지않고 탈출 
+		 }
+		
+		document.myform.submit();
 		location.href="guestList.jsp";
 	}//end
 	
 	function info(){
-		//window.open(1 팝업에 띄울 파일명 , 2 이 창의 이름, 3 크기 및 위치); window 는 생략 가능
-		open("popup.jsp","Bonjour","width=350, height=350"); //left 랑 top 생략 
+		open("popup.jsp","Bonjour","width=350, height=350"); 
 	}//end
 	
 	function idCheck(){
+		Gflag=true;
 		var a = document.myform.sabun.value;
 		var len_sabun = myform.sabun.value.length;
 		if (a!=null || a!=""){
-			//alert("중복확인 버튼을 눌러주세요.");
 			myform.pay.focus();
-			open("openID.jsp?idx="+a,"openID.jsp","width=500, height=200, left=700, top=300");
-			return; //이 뒤로는 수행 안한다.
+			open("openID.jsp?idx="+a,"openID.jsp","width=750, height=300, left=700, top=300");
+			return;
 		}
 	}//end
+
 </script>
 </head>
-<body> 
-<!-- 바디 안에 이거 넣으면 팝업창 나옴 onload="info();" -->
- <p>
-  guestWrite.jsp문서 입력화면<p>
- <form name="myform" method="post" action="guestWriteSave2.jsp">
+<body>
+ <p> guestWrite.jsp <p>
+ <form name="myform" method="post" action="guestWriteSave.jsp">
+ 사번 : <input type="text" name="sabun"  maxlength="4" value="" size="10">
+ 	  <input type="button" onclick="idCheck();" value="ID중복">
+ 	  <span id="sabun_ch"></span><br>
+ 이름 : <input type="text" name="name" value="blue">
+ 	  <span id="name_ch"></span><br> 
+ 제목 : <input type="text" name="title" value="blue">
+      <span id="title_ch"></span><br>
+ 급여 : <input type="text" name="pay" value="66">
+ 	  <span id="pay_ch"></span><br>
+ 메일 : <input type="text" name="email" value="sky@tis.com">
+ 	  <span id="email_ch"></span><br>
  
- 사번 : <input type="text" name="sabun" maxlength="4" value="7792" size="10">
- 	  <input type="button" onclick="idCheck();" value="ID중복"> <br>
- 	  
- 이름 : <input type="text" name="name" value="blue"> <br> 
- 제목 : <input type="text" name="title" value="blue"> <br>
- 급여 : <input type="text" name="pay" value="66"> <br> 
- 메일 : <input type="text" name="email" value="@tis.com"> <br>
-      <input type="button" onclick="nullCheck();" value="등록하기">
+      <input type="submit" onclick="nullCheck();" value="등록하기">
       <input type="reset" value="입력취소">
+      <!-- <input type="hidden" name="duplication_ch" id="duplication_ch" value="idUncheck"> -->
  </form>
  
  <p>
@@ -99,5 +129,6 @@
  <a href="index.jsp">[메인화면]</a>
  <a href="guestList.jsp">[전체출력]</a>	
  <p><br>
+ <jsp:include page="guest_footer.jsp"/>
 </body>
 </html>

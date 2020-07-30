@@ -26,7 +26,7 @@
  <table width=500 border=1 cellspacing=0 cellpadding=0>
    <form action="loginList.jsp"  method="post">
    <tr>
-   	 <td>UID:</td>
+   	 <td>ID:</td>
    	 <td width=200> <input type=text name="userid" > </td>
    	 <td rowspan="2"  align="center">
    	 	<input type="submit" value="LOG_IN" id="LOG_IN"> 
@@ -34,7 +34,7 @@
    </tr>
    
    <tr>
-   	  <td>PWD:</td>
+   	  <td>PW:</td>
    	  <td> <input type="password" name="pwd" > </td>
    </tr>
    </form>

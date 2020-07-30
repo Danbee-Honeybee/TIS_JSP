@@ -7,21 +7,29 @@
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="java.util.*"%>
 <%@ page import="java.text.*"%>
-<%! Connection CN;
+<%! 
+
+  Connection CN;
   Statement ST; 
   PreparedStatement PST;
   CallableStatement CST; 
   ResultSet RS; 
+  java.util.Date Gwdate;
+  
   int Gsabun;
-  int Gpat;
+  int Gpay;
   int Ghit;
   int Gtotal; 	//조회레코드갯수
   int GGtotal; 	//전체레코드갯수
   int GStotal;
+  
   String Gname, Gtitle, Gemail, Grownum;
-  java.util.Date Gwdate;
   String msg="쿼리문기술"; String submsg="";
   String Gdata;
+  
+  //댓글관련 전역변수
+  String R_msg;
+  
 %>
 <!DOCTYPE html>
 <html>

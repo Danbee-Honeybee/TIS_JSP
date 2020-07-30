@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="ssi.jsp" %>
-<%@ page import="net.tis.sql.GuestSQL" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +8,7 @@
 </style>
 </head>
 <body>
+<jsp:useBean id="dao" class="net.tis.sql.GuestSQL"></jsp:useBean> <!-- java package, class import -->
 <%  //삭제하는 쿼리
 	String temp = (String)session.getAttribute("naver"); //LoginList에서 naver에 a값을 넣었음 
 	if (temp==null || temp==""){
@@ -22,9 +21,10 @@
 	}else{
       System.out.println("[guestDelete] accessed ");
 	  String data = request.getParameter("idx");
-	  GuestSQL sql = new GuestSQL();
-	  sql.dbDelete(data);
+	  //GuestSQL dao = new GuestSQL();
+	  dao.dbDelete(data);
   	%>
+  	 
 	<script type="text/javascript">
 	alert("데이터가 삭제되었습니다. 복귀작업은 안됩니다.");
 	location.href="guestList.jsp";

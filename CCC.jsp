@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BBB.jsp</title>
+<title>CCC.jsp</title>
 	<style type="text/css">
 	  *{font-size: 26pt;}
 	  a{font-size: 26pt; text-decoration: none; color:green}
@@ -12,20 +12,27 @@
 
 </head>
 <body>  
-   <!-- BBB.jsp단독실행금지 -->
-  
-  
  <div align="center">
-    BBB.jsp문서 <br>
-        여름 장마 끝    <br>
-        무더위 시작     <br>
-    <a href="AAA.jsp">[AAA]</a>
+    CCC.jsp문서는 자바문서연결   <br>
+        여기는 C문서 입니다.<br>
     <a href="index.jsp">[index]</a>
     <a href="guestWrite.jsp">[등록]</a>
     <a href="guestList.jsp">[출력]</a> 
  	<p>
- 	<img src="images/a1.png"><br>
  </div>
  <p><br>   
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
