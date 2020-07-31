@@ -19,8 +19,9 @@
  	<img src="images/bar.gif"><br>
   </div>
 	<hr color=red size=5>
-	<jsp:forward page="CCC.jsp"></jsp:forward>
-	
+	<jsp:include page="BBB.jsp">
+	 <jsp:param name="" value=""/>
+	 </jsp:include>
  <p><br>   
 </body>
 </html>

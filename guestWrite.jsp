@@ -76,8 +76,6 @@
 			myform.email.focus();
 		}
 		
-		
-		
 		if (Gflag==false) {
 			 alert("id 중복체크 하세요");
 			 return ; //아래문장수행처리 하지않고 탈출 

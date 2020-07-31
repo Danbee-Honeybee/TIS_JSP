@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="ssi.jsp" %>
+<jsp:useBean id="sql" class="net.tis.sql.GuestSQL"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>[guestWriteSave2.jsp]</title>
+<title>[guestWriteSave.jsp]</title>
 <style type="text/css">
 
 </style>
@@ -13,7 +14,7 @@
  <p>
   <%
   Date now = new Date();
-  System.out.println("[guestWriteSave2.jsp_PST used] Oracle Connected at "+ now);	 
+  System.out.println("[guestWriteSave] Oracle Connected at "+ now);	 
   
      Gsabun = Integer.parseInt(request.getParameter("sabun"));
      Gname  = request.getParameter("name");
@@ -21,50 +22,37 @@
      Gpay   = Integer.parseInt(request.getParameter("pay"));
      Gemail = request.getParameter("email");
      
-     System.out.println("사번=" + Gsabun + "<br>");
-     System.out.println("이름=" + Gname + "<br>");
-     System.out.println("제목=" + Gtitle + "<br>");
-     System.out.println("급여=" + Gpay + "<br>");
-     System.out.println("메일=" + Gemail + "<br>");
+     System.out.println("[guestWriteSave] 사번=" + Gsabun);
+     System.out.println("[guestWriteSave] 이름=" + Gname);
+     System.out.println("[guestWriteSave] 제목=" + Gtitle);
+     System.out.println("[guestWriteSave] 급여=" + Gpay);
+     System.out.println("[guestWriteSave] 메일=" + Gemail);
+     
      //중복체크
      try{
-     msg="select sabun from guest";
+     msg="select count(*) as cnt from guest where sabun=" + Gsabun;
      ST=CN.createStatement();
      RS=ST.executeQuery(msg);
-     while (RS.next()){
-     if (Gsabun == RS.getInt("sabun")) {
-        %>
-        <div align="center"> 
-        <img src="images/a1.png"> <br>
-        </div>
-        <script type="text/javascript">
-        alert("<%=Gsabun%>은 이미 있는 사번 입니다. 다른 사번을 이용하세요.");
-        location.href="guestWrite.jsp";
-        //response.sendRedirect("guestWrite.jsp"); return 못쓰니까 금지
-        //history.back();
-        </script>
-        <%
-    
+     } catch (Exception e){
+     
+     if (Gsabun>0) {
+	        %>
+	        <script type="text/javascript">
+	        alert("<%=Gsabun%>은 이미 사용중인 사번 입니다. 다른 사번을 이용하세요.");
+	        location.href="guestWrite.jsp";
+	        </script>
+	        <%
+	       
     } else {
-    msg="insert into guest values(?, ?, ?, sysdate, ?, 0, ?)"; // 물음표 갯수가 순서임
-    PST=CN.prepareStatement(msg);
-       PST.setInt(1, Gsabun);
-       PST.setString(2, Gname);
-       PST.setString(3, Gtitle);
-       PST.setInt(4, Gpay);
-       PST.setString(5, Gemail);
-       PST.executeUpdate();
-    System.out.println("[guestWriteSave2] Data saved \n[msg] " + msg);
-    //response.sendRedirect("guestList.jsp");
-    } //else end
-  }//while end
-    } catch (Exception e){
-  	System.out.println("[guestWriteSave.jsp] 에러 사유 : " + e);}
+	    	    //guest테이블에 저장하는 코드
+	    		sql.dbInsert(Gsabun, Gname, Gtitle, Gpay, Gemail);
+	    	%>	<script type="text/javascript">
+	    	    location.href="guestList.jsp";
+	    	    </script>
+	    	<%
+	    	}
+    	//response.sendRedirect("guestList.jsp");
+  	    System.out.println("[guestWriteSave] 에러 사유 : " + e);}
   %>
-
- <br>
- <a href="guestWrite.jsp">[회원등록]</a>
- <a href="index.jsp">[메인화면]</a>
- <a href="guestList.jsp">[전체출력]</a>   
 </body>
 </html>
