@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
+<%@ page import="java.util.Vector" %>
+<%@ page import="net.tis.sql.GuestSQL" %>
+<%@ page import="net.tis.sql.GuestDTO" %>
+
 <%@ include file ="ssi.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -92,17 +96,16 @@
 </tr>
 
 <tr align="center" bgcolor="yellow">
-<td>행번호</td> <td>사번</td> <td>이름</td> <td>제목</td> <td>이메일</td> <td>날짜</td> <td>조회수</td> <td>삭제</td>
+<td>행번호</td> <td>사번</td> <td>이름</td> <td>제목</td> 
+<td>이메일</td> <td>날짜</td> <td>조회수</td> <td>삭제</td>
 </tr>
-
-<%
-	while(RS.next()){
-		Gsabun=RS.getInt("sabun");
-		Gtitle=RS.getString("title");
-		Gemail=RS.getString("email");
+<%! GuestSQL GS= new GuestSQL(); %>
+<%	int j=0;
+	Vector VT = GS.dbSelect();
+	while(Gtotal!=j){
 		
 //=========================================================================================================
-		 String msg3; Statement ST3; ResultSet RS3; int RGtotal;
+/*		 String msg3; Statement ST3; ResultSet RS3; int RGtotal;
 		 msg3="select count(*) as rcnt from guestreply where sabun=" + Gsabun; //Gsabun
 		 ST3=CN.createStatement();
 		 RS3=ST3.executeQuery(msg3);
@@ -114,19 +117,21 @@
 	  		} else {
 	  			R_msg= "";
 	  		}
- 		}
+ 		}*/
 //=========================================================================================================
-			
 %>
 <tr align="center" onmouseover="style.backgroundColor='rgb(0,200,200)'" onmouseout="style.backgroundColor=''">
-  <td><%= RS.getInt("rn") %></td>
-  <td><%= RS.getInt("sabun") %></td>
-  <td><%= RS.getString("name") %></td> 
-  <td><a href="guestDetail.jsp?idx=<%=Gsabun%>"><%= RS.getString("title") %>
-  	<span id="span_rcnt"><%=R_msg %></span></a></td> 
-  <td><%= RS.getString("email") %></td>
-  <td><%= RS.getDate("wdate") %></td> 
-  <td><%= RS.getInt("hit") %></td>
+  <td><%= VT.get(j++) %></td>
+  <td><%= VT.get(j++) %></td>
+  <td><%= VT.get(j++) %></td>
+  <td><a href="guestDetail.jsp?idx=<%=Gsabun%>">
+      <%= VT.get(j++) %>
+  	<span id="span_rcnt">
+  	<%= R_msg %>
+  	</span></a></td> 
+  <td><%= VT.get(j++) %></td>
+  <td><%= VT.get(j++) %></td>
+  <td><%= VT.get(j++) %></td>
   <td align="center"><input type="button" value="삭제" onclick="location.href='guestDelete.jsp?idx=<%=Gsabun %>'"></td>
 </tr>
 <% } %>
