@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <title>[ Index.jsp ]</title>
 <script type="text/javascript">
-	setTimeout("location.href='guestList.jsp'", 3000)
+	setTimeout("location.href='guestList.jsp'", 1000)
 </script>
 <style type="text/css">
 	#pline{ margin-top : 70px; }
@@ -13,7 +13,6 @@
 </style>
 </head>
 <body>
-	
 	 <div align="center">
         <br>
         <video width="900" autoplay muted loop controls="controls">

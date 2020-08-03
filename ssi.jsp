@@ -29,6 +29,11 @@
   
   //댓글관련 전역변수
   String R_msg;
+  String Rdata;
+  String Rwriter;
+  String Rcontent;
+  int Rrn, Rnum, Rsabun;
+  int Rcnt;
   
 %>
 <!DOCTYPE html>
