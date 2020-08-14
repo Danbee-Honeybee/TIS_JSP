@@ -28,13 +28,15 @@
 	   msg = "INSERT INTO GUESTREPLY VALUES(guestreply_seq.nextval, '"+Ewriter+"', '"+Econtent+"', "+Esabun+")";
 	   ST=CN.createStatement();
 	   ST.executeUpdate(msg);
+	   System.out.println("[guestReply_insert] 댓글저장 성공했습니다");
+	   /* response.sendRedirect("guestDetail.jsp?idx=" + Esabun); */
  %>
  
 	   	<script type="text/javascript">
   		alert("댓글이 등록 되었습니다.");
   		location.href="guestList.jsp";
   		</script>
- 
+
 </body>
 </html>
 

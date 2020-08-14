@@ -42,8 +42,7 @@
 
 <%	int j=0;
 	ArrayList<GuestDTO> LG = GS.dbSelect(); 
-	for(int i=0; i<LG.size(); i++){
-		GuestDTO bean = LG.get(i) ;
+	for(GuestDTO bean : LG){
 		int Gsabun    = bean.getSabun();
 		String Gtitle = bean.getTitle();
 %>

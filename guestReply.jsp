@@ -12,20 +12,33 @@
 	  a:hover{ font-size: 18pt; text-decoration:underline; color:green ; font-family: Comic Sans MS; }
 	  #rsave{
 	    font-size: 26pt; font-weight: bold;
-	    background:lightgreen;   height:130px;
+	    background:Orange;   height:130px;
 	  }
-	  tr{align:center}
 	</style>
 
 	<script type="text/javascript">
 	  var gr_num; //전역변수
 	  
 	  function re_edit(num, writer, content){
-		  
+		  gr_num = num;
+		  reply_form.bt_save.value = "댓글수정";
 	  }//end
 	  
-	  function re_save(){//3페이지 26번라인
-	  
+	  function re_save(sabun){//3페이지 26번라인
+	  	var bt	    = reply_form.bt_save.value; //bt가 버튼 안내문을 가지고 있다
+	  	var writer  = reply_form.writer.value;
+	  	var content = reply_form.content.value;
+	  	
+	  	if(bt=="댓글저장"){
+	  		document.reply_form.action="guestReply.jsp?writer="+writer+"&content="+content+"&sabun="+gr_num;
+	  		document.reply_form.method="post";
+	  		document.reply_form.submit();
+	  	}else if(bt=="댓글수정"){
+	  		reply_form.bt_save.value = "댓글저장";
+	  		document.reply_form.action="guestReply.jsp?writer="+writer+"&content="+content+"&sabun="+gr_num;
+	  		document.reply_form.method="post";
+	  		document.reply_form.submit();
+	  	}
 	  }//end
 	</script>
 </head>
@@ -34,16 +47,16 @@
  <%
   //guestReply.jsp단독실행하면 에러발생
   String Rdata = request.getParameter("idx") ;
-  System.out.println("guest_reply.jsp댓글문서 넘어온  Ridx="+ Rdata);
+  System.out.println("[guest_reply] 댓글 문서 넘어온  idx="+ Rdata);
  %>
  
- 	<form name="reply_form" method="get" action="guestReply_insert.jsp">
+ 	<form name="reply_form">
  	 <table width=900 border=1 cellspacing=0>
  	 <tr width="250">
- 	  	<td> <img src="images/z1.gif"> Gidx: <img src="images/z1.gif">  </td>
+ 	  	<td> <img src="images/z1.gif"> 사번: <img src="images/z1.gif">  </td>
  	  	<td> <input type="text" name="newSabun" value="<%= Rdata %>" size=50 readonly="readonly"> </td>
  	  	<td rowspan="3"  align="center">
- 	  		<input type="submit" id="rsave" name="bt_save" onClick="re_save();" value="댓글저장">
+ 	  		<input type="submit" id="rsave" name="bt_save" onClick="re_save(<%=Rdata %>);" value="댓글저장">
  	  	</td>
  	  </tr>
  	  
@@ -60,15 +73,9 @@
  	</form>
  	
  <p>
- <table width=900 border=1 cellspacing=0>
-  <tr bgcolor="pink" align="center" >
+ <table width=900 border=0 cellspacing=0>
+  <tr bgcolor="Tomato" align="center" >
   	<td colspan="4"> 댓글 데이터 출력 </td> 
-  </tr>
-  <tr align="center">
-  	<td width="200">행번호(NUM)</td>
-  	<td width="200">저자(WRITER)</td>
-  	<td>내용(CONTENT)</td>
-  	<td>삭제/수정</td>
   </tr>
 <%
 	 String a="select rownum rrn, r.num, r.writer, r.content ,g.sabun from guest g " ; 
@@ -85,13 +92,14 @@
 		 Rcontent=RS.getString("content");
 		 Rsabun=RS.getInt("sabun");
 %>
-  <tr align="center" onmouseover="style.backgroundColor='yellow'" onmouseout="style.backgroundColor='' ">
+  <tr align="center" onmouseover="style.backgroundColor='gray'" onmouseout="style.backgroundColor='' ">
   	<td width=70>  <%= Rrn %> </td>
   	<td width=150> <%= Rwriter %> </td>
   	<td width=200> <%= Rcontent %> </td>
   	<td>
   		<a href="guestReply_delete.jsp?Didx=<%=Rnum%>">[댓글삭제]</a>
-  		<a href="guestReply_edit.jsp?Enum=<%=Rnum%>&Ewriter=<%=Rwriter%>&Econtent=<%=Rcontent%>&Esabun=<%=Rsabun %>">[댓글수정]</a> 
+  		<!-- <a href="guestReply_edit.jsp?Enum=<%=Rnum%>&Ewriter=<%=Rwriter%>&Econtent=<%=Rcontent%>&Esabun=<%=Rsabun %>">[댓글수정]</a> --> 
+  		<input type="button" name="bt_edit" onclick="re_edit(<%=Rnum%>,<%=Rwriter%>,<%=Rcontent%>);" value="댓글수정">
   	</td>
   </tr>
   <% } %>

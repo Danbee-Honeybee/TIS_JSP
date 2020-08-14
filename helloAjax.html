@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>helloAjax.html</title>
+<script type="text/javascript">
+	var xhr;
+	
+	function two(){
+		xhr=first();
+		var b=document.myform.title.value;
+		var url="hello.jsp?title="+b;
+		
+		xhr.onreadystatechange = display;
+		xhr.open("GET", url, true);
+		xhr.send(null);
+	}//end
+	
+	function first(){
+		return new XMLHttpRequest();
+	}
+
+	function display(){
+		if(xhr.readyState==4){
+			if(xhr.status==200){
+				var str=xhr.responseText;
+				alert(str);
+				document.getElementById("msg").innerHTML=str;
+			}
+		}
+	}//end
+
+</script>
+</head>
+<body>
+	<div id="msg">
+		<form name="myform" method="get">
+		<b>아이디:</b>
+		<input type="text"   name="title"    value="hb" id="title">
+		<input type="button" onclick="two()" value="Ajax전송">
+		</form>
+		<br>
+		<img src="images/a3.png">
+	</div>
+</body>
+</html>
+
+

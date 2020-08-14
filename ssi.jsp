@@ -55,7 +55,6 @@
     String url="jdbc:oracle:thin:@127.0.0.1:1521:XE" ;
     CN=DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE","system","1234");
     Date now = new Date();
-    System.out.println("[ssi.jsp] Oracle Connected at " + now);
 	}catch(Exception ex){System.out.println("Error name :" + ex);}
 	ST=CN.createStatement();
 %>

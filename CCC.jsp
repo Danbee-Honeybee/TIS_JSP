@@ -3,36 +3,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CCC.jsp</title>
+<title> CCC.jsp </title>
 	<style type="text/css">
-	  *{font-size: 26pt;}
-	  a{font-size: 26pt; text-decoration: none; color:green}
-	  a:hover{font-size: 30pt;  color:blue}
+	  *{ font-size: 20pt; font-weight: bold; }
+	  a{ font-size: 24pt; text-decoration:none; color:blue ; font-family: Comic Sans MS; }
+	  a:hover{ font-size: 30pt; text-decoration:underline; color:green ; font-family: Comic Sans MS; }
 	</style>
-
 </head>
-<body>  
- <div align="center">
-    CCC.jsp문서는 자바문서연결   <br>
-        여기는 C문서 입니다.<br>
-    <a href="index.jsp">[index]</a>
-    <a href="guestWrite.jsp">[등록]</a>
-    <a href="guestList.jsp">[출력]</a> 
- 	<p>
- </div>
- <p><br>   
+<body>
+	현재문서 CCC.jsp <p>
+	세션값 확인 : <%=session.getId()%>
+	<hr>
+	<a href="AAA.jsp">[AAA.jsp]</a>
+	<a href="index.jsp">[index.jsp]</a>
+	<a href="guestList.jsp">[guestList.jsp]</a>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-

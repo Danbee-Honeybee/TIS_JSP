@@ -16,7 +16,7 @@
 </head>
 <body>
 		04_researchForm.jsp (315p)<br>
-		<form action="04_researchSave.jsp">
+		<form action="04_researchSave2.jsp">
 		제목 : <input type="text" name="title" value="snow"> 	<br>
 		나이 : <input type="text" name="age"   value="27"> 	<br>
 		계절 : 
