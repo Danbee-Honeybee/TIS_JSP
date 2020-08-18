@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title></title>
+	<style>
+		table {
+			font-size:20pt;
+		    font-weight: bold;
+			height: 100px;
+			width: 950px;
+			text-align: center;
+			color: blue;
+		}
+	</style>
+
+
+ <script>
+  setInterval(function(){
+	var xhr = new XMLHttpRequest();
+	xhr.onload=function(){
+			var str=xhr.responseText;
+			var obj=JSON.parse(str);
+			var news_index = Math.round(Math.random()*6);
+			var target=document.getElementById("demo");
+                target.innerHTML=obj.news[news_index].title;
+	};
+
+	xhr.open('GET', 'newsjson.json', true);
+	xhr.send();
+  }, 1500);
+ </script>
+</head>
+<body>
+	<h2>  1초 간격으로 뉴스 요청 Ajax 통신  </h2>
+	<table border="1" cellspacing="0">
+		<tr>
+			<th> <font color=red> 뉴스 내용 </font></th>
+		</tr>
+		<tr>
+			<td id="demo">Waiting 기다리세요.........................</td>
+		</tr>
+	</table>
+</body>
+</html>

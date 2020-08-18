@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title></title>
+	<style>
+		table {
+			font-size:20pt;
+		    font-weight: bold;
+			height: 100px;
+			width: 950px;
+			text-align: center;
+			color: blue;
+		}
+	</style>
+
+
+<script>
+  window.onload = function () {
+		setInterval(function(){
+			var xhr = new XMLHttpRequest();
+			xhr.onload=function(){
+				if(xhr.status==200){ //이건 없어도 됌
+					var str=xhr.responseText;
+					var obj=JSON.parse(str);
+					var idx = Math.round(Math.random()*6);
+					var target=document.getElementById("msg");
+                    target.innerHTML="<img src='images/pic_"+idx+".jpg' />";
+				}
+			};
+
+			xhr.open('GET', 'newsjson.json', true);
+			xhr.send();
+		  }, 1500); //1.5초
+  };
+</script>
+</head>
+<body>
+	<h2>  그림표시 실시간으로 뿌리기 Ajax 통신  </h2>
+	<table border="1" cellspacing="0">
+		<tr>
+			<th> <font color=red> 이미지 </font></th>
+		</tr>
+		<tr>
+			<td id="msg" height=100>로딩중...</td>
+		</tr>
+	</table>
+</body>
+</html>
