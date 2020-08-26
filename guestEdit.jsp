@@ -1,34 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="ssi.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>[guestEditSave.jsp]</title>
-<style type="text/css">
-</style>
+<title>[guestEdit.jsp]</title>
 </head>
-<body> <!-- 단독실행 금지 -->
-    <%
-    String Gsabun= request.getParameter("sa");
-    String Gname= request.getParameter("na");
-    String Gtitle= request.getParameter("ta");
-    String Gpay= request.getParameter("pa");
-    String Gemail= request.getParameter("ea");
-    System.out.println("[guestEdit] 넘어온 Gsabun : " + Gdata);
-    %>
-
- <form method="get" action="guestEditSave.jsp">
- 사번 : <input type="text" name="sabun" value="<%=Gsabun %>" readonly><br>
- 이름 : <input type="text" name="name" value="<%=Gname %>"><br> 
- 제목 : <input type="text" name="title" value="<%=Gtitle %>"><br>
- 급여 : <input type="text" name="pay" value="<%=Gpay %>"><br> 
- 메일 : <input type="text" name="email" value="<%=Gemail %>"><br>
+<body>
+  EL태그로 데이터 접근하기 <br>
+ <form method="get" action="geditpre.do">
+ 사번 : <input type="text" name="sabun" value="${DTO.sabun}" readonly><br>
+ 이름 : <input type="text" name="name"  value="${DTO.name}"><br> 
+ 제목 : <input type="text" name="title" value="${DTO.title}"><br>
+ 급여 : <input type="text" name="pay"   value="${DTO.pay}"><br> 
+ 메일 : <input type="text" name="email" value="${DTO.email}"><br>
       <input type="submit" value="수정완료">
-      <input type="reset" value="수정취소">
+      <input type="reset"  value="수정취소">
    </form>
    <p>
-   <a href="guestList.jsp">[뒤로가기]</a>
+   <a href="guestWrite.jsp">[등록]	</a>
+   <a href="glist.do">		[전체출력]</a>
+   <a href="index.jsp">		[index]	</a>
    </p>
 </body>
 </html>

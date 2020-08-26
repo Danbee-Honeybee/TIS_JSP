@@ -23,7 +23,11 @@
    </font><p>
 	<img src="images/bt_login.gif" width=450 height=70><p>
 	<img src="images/bar.gif" width=450 >
- <%  
+	
+	<a href="index.jsp">index</a>
+	<a href="glist.do">전체출력</a>
+ 	<a href="login.jsp">로그인</a>&nbsp;
+ <% 
   }else{
     //response.sendRedirect("login.jsp");
     out.println("<font size=7 color=red><b></b>"+usera+"님 로그인실패</font><p>");

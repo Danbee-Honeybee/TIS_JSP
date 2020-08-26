@@ -7,12 +7,12 @@
 <meta charset="UTF-8">
 <title> [guestReply.jsp] </title>
 	<style type="text/css">
-	  *{ font-size: 16pt; font-weight: bold; }
-	  a{ font-size: 16pt; text-decoration:none; color:blue ; font-family: Comic Sans MS; }
-	  a:hover{ font-size: 18pt; text-decoration:underline; color:green ; font-family: Comic Sans MS; }
+	  *{ font-size: 10pt; font-weight: bold; }
+	  a{ font-size: 10pt; text-decoration:none; color:blue ; font-family: Comic Sans MS; }
+	  a:hover{ font-size: 10pt; text-decoration:underline; color:green ; font-family: Comic Sans MS; }
 	  #rsave{
-	    font-size: 26pt; font-weight: bold;
-	    background:Orange;   height:130px;
+	    font-size: 10pt; font-weight: bold;
+	    background:Orange; width:100px;
 	  }
 	</style>
 
@@ -51,29 +51,31 @@
  %>
  
  	<form name="reply_form">
- 	 <table width=900 border=1 cellspacing=0>
- 	 <tr width="250">
- 	  	<td> <img src="images/z1.gif"> 사번: <img src="images/z1.gif">  </td>
- 	  	<td> <input type="text" name="newSabun" value="<%= Rdata %>" size=50 readonly="readonly"> </td>
- 	  	<td rowspan="3"  align="center">
- 	  		<input type="submit" id="rsave" name="bt_save" onClick="re_save(<%=Rdata %>);" value="댓글저장">
- 	  	</td>
+ 	 <table width=400 cellspacing=0>
+ 	 <tr>
+ 	  	<td width=100> <img src="images/z1.gif"> 사번: <img src="images/z1.gif">  </td>
+ 	  	<td> <input type="text" name="newSabun" value="<%= Rdata %>" readonly="readonly"> </td>
  	  </tr>
  	  
  	  <tr>
  	  	<td> <img src="images/z1.gif"> 저자: <img src="images/z1.gif">  </td>
- 	  	<td> <input type="text" name="newWriter" size=50> </td>
+ 	  	<td> <input type="text" name="newWriter"> </td>
  	  </tr>
  	  
  	  <tr>
  	  	<td> <img src="images/z1.gif"> 내용: <img src="images/z1.gif">  </td>
  	  	<td> <textarea rows="3" cols="27" name="newContent"></textarea> </td>
  	  </tr>
+ 	  <tr>
+ 	  	<td colspan="3" align="center">
+ 	  		<input type="submit" id="rsave" name="bt_save" onClick="re_save(<%=Rdata %>);" value="댓글저장">
+ 	  	</td>
+ 	  </tr>
  	 </table>
  	</form>
  	
  <p>
- <table width=900 border=0 cellspacing=0>
+ <table width=400 border=0 cellspacing=0>
   <tr bgcolor="Tomato" align="center" >
   	<td colspan="4"> 댓글 데이터 출력 </td> 
   </tr>
@@ -93,8 +95,8 @@
 		 Rsabun=RS.getInt("sabun");
 %>
   <tr align="center" onmouseover="style.backgroundColor='gray'" onmouseout="style.backgroundColor='' ">
-  	<td width=70>  <%= Rrn %> </td>
-  	<td width=150> <%= Rwriter %> </td>
+  	<td width=70>  <%= Rrn 		%> </td>
+  	<td width=150> <%= Rwriter 	%> </td>
   	<td width=200> <%= Rcontent %> </td>
   	<td>
   		<a href="guestReply_delete.jsp?Didx=<%=Rnum%>">[댓글삭제]</a>

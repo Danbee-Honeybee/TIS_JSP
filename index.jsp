@@ -5,7 +5,9 @@
 <meta charset="UTF-8">
 <title>[ Index.jsp ]</title>
 <script type="text/javascript">
-	setTimeout("location.href='guestList.jsp'", 1000)
+	/* index 는 사용자를 glist.do 로 보내고 
+	   glist.do 는 사용자를 또 guestList.jsp로 보낸다. */
+	setTimeout("location.href='glist.do'", 1000); 
 </script>
 <style type="text/css">
 	#pline{ margin-top : 70px; }
@@ -15,8 +17,8 @@
 <body>
 	 <div align="center">
         <br>
-        <video width="900" autoplay muted loop controls="controls">
-        <source src="images/scuba.mp4"></video></sourse>
+        <video width="400" autoplay muted loop controls="controls">
+        <source src="images/scuba.mp4"></source>
         </video>
         <p></p>
     </div>

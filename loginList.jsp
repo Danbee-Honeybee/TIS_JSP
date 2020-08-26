@@ -4,7 +4,7 @@
 <html> <head>
 <title> [loginList.jsp]</title>
    <style type="text/css">
-	  *{font-size:14pt; font-weight:bold;  font-family: Comic Sans MS ; margin-left: 10px; }
+	  *{font-size:14pt; font-weight:bold; font-family: Comic Sans MS ; margin-left: 10px; }
 	  a{font-size:14pt; text-decoration:none; font-weight:bold; color:blue;  font-family: Comic Sans MS ; }
 	  a:hover{font-size:16pt; text-decoration:underline; color:green;  font-family: Comic Sans MS ; }
    </style>
