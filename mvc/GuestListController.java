@@ -31,38 +31,50 @@ public class GuestListController extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
-		out.println("<h2>[GuestListController] 오후 2:04</h2>");
-		
 		/*페이지 관련 전역변수*/
-	  String pnum; //<a href="guestList.jsp?pageNum=14"> [14] </a>
+	  String pnum;
 	  int pageNUM, pagecount;  
 	  int start, end;
-	  int startpage, endpage ;
+	  int startpage, endpage;
 	  int tmp; 
 	 
 	  String sqry;
 	  String skey, sval;
 	  String returnpage;
 		
+	  /*사용자가 선택한 페이지넘버*/
+	  pnum = request.getParameter("pageNum"); //14
+	  if(pnum==null||pnum=="") {pnum="1";}
+	  pageNUM = Integer.parseInt(pnum);
+	  
+	  
 		GuestDTO DTO = new GuestDTO();
 		GuestSQL GS = new GuestSQL();
 		
-		/* LG가 모든 데이터를 가지고 있다. (사번, 이름, 제목, 급여, 날짜, 조회수, 메일) 
-		 * 이 정보를 guestList.jsp 로 넘겨야한다. */
+		int Gtotal = GS.dbGtotal();
 		
-		ArrayList<GuestDTO> LG = GS.dbSelect(); //객체 데이터 덩어리
-		int Gtotal = GS.dbGtotal(); 						//레코드 총 갯수 (숫자만)
+		/*14페이지를 선택했을때 가장 위에 있는 행번호와 끝번호*/
+		start = (pageNUM-1)*10+1; //행번호 131번
+		end   = (pageNUM*10);			//행번호 140번
 		
-		/* LS와 Gtotal을 어떻게 넘길것인가? request.setAttribute("가짜", 진짜) 로 */
+		if(Gtotal%10 == 0) {pagecount = Gtotal/10;}
+		else {pagecount = (Gtotal/10)+1;}
+		
+		tmp = (pageNUM-1)%10; 		//3
+		startpage = pageNUM-tmp; 	//11p
+		endpage   = startpage+9;	//20p
+		if(endpage>pagecount) {endpage=pagecount;}
+		
+		
+		//ArrayList<GuestDTO> LG = GS.dbSelect(); //처음 원본
+		ArrayList<GuestDTO> LG = GS.dbSelect(start,end);
+		
 		
 		request.setAttribute("LG", LG);
 		request.setAttribute("Gtotal", Gtotal);
-		
-		/*  그럼 자원을 보낼때는? request.setAttribute("가짜", 진짜);
-				RequestDispatcher는 데이터 자원을 보낼 문서를 명명해주고싶을때 사용
-			 	이제 guestList.jsp 를 단독실행하면 에러된다. 
-			 	glist.do = GuestListController.java 문서 단독실행 가능
-			 	자원을 가지고 있는 GuestListController.java에서 guestList로 자원을 포워딩 해줘야한다. */
+		request.setAttribute("startpage", startpage);
+		request.setAttribute("endpage", endpage);
+		request.setAttribute("pagecount", pagecount);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("guestList.jsp");
 		dis.forward(request, response);

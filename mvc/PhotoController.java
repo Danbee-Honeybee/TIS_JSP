@@ -38,7 +38,7 @@ public class PhotoController extends HttpServlet {
     	  
     	  //request 방식
     	  GuestSQL GS = new GuestSQL();
-    	  ArrayList<GuestDTO> LG = GS.dbSelect(); 
+    	  ArrayList<GuestDTO> LG = GS.dbSelect(1,10); 
     	  int Gtotal = GS.dbGtotal();
     	  request.setAttribute("LG", LG);
     	  request.setAttribute("Gtotal", Gtotal);
